@@ -11,7 +11,7 @@ const MePage = () => {
     <div className="w-full">
       {cachedUser && cachedUser.data ? (
         <div className="w-full space-y-3">
-          <Avatar className="w-20 h-20">
+          <Avatar className="w-40 h-40">
             <AvatarImage src={cachedUser.data.data!.profilePhoto} />
             <AvatarFallback>
               {cachedUser.data.data!.name.split(" ")[0][0] +
@@ -19,9 +19,20 @@ const MePage = () => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-xl font-semibold">
-              {cachedUser.data.data!.name}
-            </h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-semibold">
+                {cachedUser.data.data!.name}
+              </h1>
+              <div
+                className={`${
+                  cachedUser.data.data!.status === "active"
+                    ? "bg-green-500"
+                    : "bg-red-500"
+                } w-fit px-3 py-1 text-sm text-white text-center rounded-full`}
+              >
+                {cachedUser.data.data!.status}
+              </div>
+            </div>
             <p>{cachedUser.data.data!.email}</p>
           </div>
         </div>

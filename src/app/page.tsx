@@ -68,7 +68,8 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full p-5 h-dvh flex justify-center items-start md:items-center">
+    <div className="w-full p-5 h-dvh flex justify-center items-start md:items-center space-y-5">
+      <h1 className="text-2xl font-semibold">Cyzygy Assessment</h1>
       <div className="w-full md:w-1/3 p-4 bg-white shadow-xl rounded-xl">
         <h1 className="text-xl font-semibold">Login</h1>
         <Form {...form}>

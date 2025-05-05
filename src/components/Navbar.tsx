@@ -1,5 +1,6 @@
 "use client";
-import { redirect } from "next/navigation";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
 
 import {
@@ -10,19 +11,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IUser } from "@/types/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 
 type Props = {
   userData?: IUser | null;
 };
 
 const Navbar = ({ userData }: Props) => {
+  const router = useRouter();
+
   const logout = () => {
     deleteCookie("token");
     deleteCookie("role");
-    redirect("/");
+    router.push("/");
   };
-  console.log("Uesr : ", userData);
+
   return (
     <div className="w-full p-5 max-w-5xl mx-auto flex items-center justify-between">
       <Link href="/" className="text-xl font-semibold">
