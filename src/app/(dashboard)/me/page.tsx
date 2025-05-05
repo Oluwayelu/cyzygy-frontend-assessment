@@ -6,12 +6,12 @@ import { IUser } from "@/types/api";
 
 const MePage = () => {
   const cachedUser = useReactQueryData<IUser>("auth-user");
-  console.log("Cached : ", cachedUser);
+
   return (
     <div className="w-full">
       {cachedUser && cachedUser.data ? (
         <div className="w-full space-y-3">
-          <Avatar>
+          <Avatar className="w-20 h-20">
             <AvatarImage src={cachedUser.data.data!.profilePhoto} />
             <AvatarFallback>
               {cachedUser.data.data!.name.split(" ")[0][0] +

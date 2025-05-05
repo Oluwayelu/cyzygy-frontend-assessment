@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <RQProvider>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-transparent to-blue-500/50 `}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-100`}
         >
           {children}
           <Toaster richColors />
