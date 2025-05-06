@@ -45,6 +45,7 @@ const DataTable = ({ data }: Props) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>("");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const columns: ColumnDef<IUser>[] = [
@@ -54,7 +55,12 @@ const DataTable = ({ data }: Props) => {
       cell: ({ row }) => (
         <div className="flex items-center justify-center gap-2">
           <Avatar>
-            <AvatarImage src={row.original.profilePhoto} />
+            <AvatarImage
+              src={row.original.profilePhoto}
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
             <AvatarFallback>
               {row.original.name.split(" ")[0][0] +
                 row.original.name.split(" ")[1][0]}
@@ -172,6 +178,17 @@ const DataTable = ({ data }: Props) => {
     state: {
       sorting,
       columnFilters,
+      globalFilter,
+    },
+    globalFilterFn: (row, columnId, filterValue) => {
+      // Custom global filter function to search across multiple columns
+      const searchValue = filterValue.toLowerCase();
+      return (
+        row.original.name.toLowerCase().includes(searchValue) ||
+        row.original.email.toLowerCase().includes(searchValue) ||
+        row.original.role.toLowerCase().includes(searchValue) ||
+        row.original.status.toLowerCase().includes(searchValue)
+      );
     },
   });
 
@@ -179,16 +196,14 @@ const DataTable = ({ data }: Props) => {
     <div className="mt-5 w-full space-y-5">
       <div className="w-full flex justify-end">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
+          placeholder="Search..."
+          value={globalFilter}
+          onChange={(event) => setGlobalFilter(event.target.value)}
+          className="max-w-xs bg-white"
         />
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-white">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
