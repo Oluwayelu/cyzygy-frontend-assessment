@@ -55,13 +55,15 @@ const DeleteUser = ({ id, open, setOpen }: Props) => {
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <div>
+        <div className="space-y-2">
           <p>
             Are you sure you want to delete this user. This action cannot be
             reversed.
           </p>
           <div className="flex items-center gap-3">
-            <DialogClose>Cancel</DialogClose>
+            <DialogClose>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
             <Button type="submit" onClick={deleteUser} className="bg-red-500">
               {isPending ? "Deleting...." : "Delete user"}
             </Button>
