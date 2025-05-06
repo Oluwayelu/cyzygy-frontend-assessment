@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
+import { useQueryClient } from "@tanstack/react-query";
 
 import {
   DropdownMenu,
@@ -18,15 +19,19 @@ type Props = {
 
 const Navbar = ({ userData }: Props) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
+  // Logout function to clear cookies and invalidate the auth-user query
   const logout = () => {
     deleteCookie("token");
     deleteCookie("role");
+    queryClient.invalidateQueries({ queryKey: ["auth-user"] });
     router.push("/");
   };
 
   return (
     <div className="w-full p-5 max-w-5xl mx-auto flex items-center justify-between">
+      {/* Logo */}
       <Link href="/" className="text-xl font-semibold">
         Cyzygy
       </Link>

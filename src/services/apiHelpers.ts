@@ -16,7 +16,7 @@ export const useReactQuery = <T>(key: string, path: string) => {
   >({
     queryKey: [key],
     queryFn: () => apiInstance.get<ApiResponseSuccess<T>>(path),
-    staleTime: 7 * 24 * 60 * 60 * 1000,
+    staleTime: 0,
     retry: 1,
   });
 };

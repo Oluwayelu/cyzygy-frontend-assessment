@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { setAuthCookie } from "@/lib/utils";
 import { SignInResponse } from "@/types/api";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -26,6 +27,7 @@ type FormSchema = z.infer<typeof formSchema>;
 
 export default function Home() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useReactMutation<SignInResponse, FormSchema>(
     "/auth/login",
     "post"
@@ -41,8 +43,6 @@ export default function Home() {
   const onSubmit = (values: FormSchema) => {
     mutate(values, {
       onSuccess: ({ data }) => {
-        console.log(data);
-
         const role = data.data?.role;
         const token = data.data?.token;
 
@@ -50,6 +50,7 @@ export default function Home() {
         toast.success("Success", {
           description: data.message,
         });
+        queryClient.invalidateQueries({ queryKey: ["auth-user"] });
 
         const redirect = role === "admin" ? "/dashboard" : "/me";
         router.push(redirect);
