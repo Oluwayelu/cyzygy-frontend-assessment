@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cyzygy Frontend
 
-## Getting Started
+This repository contains the **Cyzygy** frontend application, built as part of the fullstack assessment. It features an admin dashboard for managing users, including creating, updating, and deleting users, as well as viewing user profiles.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🌐 Built with **Next.js** for server-side rendering and client-side interactivity.
+- 🧑‍💻 Admin dashboard for managing users.
+- 📸 Profile photo uploads and display with fallback support.
+- 🔍 Search and filter functionality for user data.
+- 🔐 Integration with a secure backend for authentication and data management.
+- 📚 Modular and scalable project structure.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Next.js**: React framework for building web applications.
+- **React Query**: For data fetching and caching.
+- **TypeScript**: For type safety and better developer experience.
+- **Tailwind CSS**: For styling the application.
+- **Radix UI**: For accessible and customizable UI components.
+
+---
+
+## 📦 Installation
+
+### 1. **Clone the repo**
+
+```bash
+git clone https://github.com/Oluwayelu/cyzygy-frontend.git
+cd cyzygy-frontend
+```
+
+### 2. **Install dependencies**
+
+```bash
+npm install
+```
+
+### 3. **Setup your .env.local**
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api/v1
+```
+
+### 4. **Start the server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
