@@ -112,6 +112,7 @@ const AddUser = ({ open, setOpen }: Props) => {
                           {...field}
                           placeholder="John"
                           className="w-full"
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -129,6 +130,7 @@ const AddUser = ({ open, setOpen }: Props) => {
                           {...field}
                           placeholder="Doe"
                           className="w-full"
+                          disabled={isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -147,6 +149,7 @@ const AddUser = ({ open, setOpen }: Props) => {
                         {...field}
                         placeholder="john.doe@example.com"
                         className="w-full"
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -162,6 +165,7 @@ const AddUser = ({ open, setOpen }: Props) => {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={isPending}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -192,13 +196,14 @@ const AddUser = ({ open, setOpen }: Props) => {
                         setProfilePhoto(e.target.files[0]); // Store the selected file
                       }
                     }}
+                    disabled={isPending}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
 
-              <Button type="submit">
-                {isPending ? "Adding...." : "Add user"}
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Adding..." : "Add user"}
               </Button>
             </form>
           </Form>

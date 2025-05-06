@@ -49,7 +49,10 @@ type FormSchema = z.infer<typeof formSchema>;
 
 const UpdateUser = ({ id, open, setOpen }: Props) => {
   const queryClient = useQueryClient();
-  const { data } = useReactQuery<IUser>(`user-${id}`, `/user/${id}`);
+  const { data, isPending: loading } = useReactQuery<IUser>(
+    `user-${id}`,
+    `/user/${id}`
+  );
   const { mutate, isPending } = useReactMutation<IUser, FormData>(
     `/user/${id}`,
     "put"
@@ -121,6 +124,7 @@ const UpdateUser = ({ id, open, setOpen }: Props) => {
                           {...field}
                           placeholder="John"
                           className="w-full"
+                          disabled={loading || isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -136,8 +140,9 @@ const UpdateUser = ({ id, open, setOpen }: Props) => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="John"
+                          placeholder="Doe"
                           className="w-full"
+                          disabled={loading || isPending}
                         />
                       </FormControl>
                       <FormMessage />
@@ -156,6 +161,7 @@ const UpdateUser = ({ id, open, setOpen }: Props) => {
                         {...field}
                         placeholder="john.doe@example.com"
                         className="w-full"
+                        disabled={loading || isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -171,6 +177,7 @@ const UpdateUser = ({ id, open, setOpen }: Props) => {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={loading || isPending}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -200,13 +207,14 @@ const UpdateUser = ({ id, open, setOpen }: Props) => {
                         setProfilePhoto(e.target.files[0]); // Store the selected file
                       }
                     }}
+                    disabled={loading || isPending}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
 
-              <Button type="submit">
-                {isPending ? "Updating...." : "Update user"}
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Updating..." : "Update user"}
               </Button>
             </form>
           </Form>
