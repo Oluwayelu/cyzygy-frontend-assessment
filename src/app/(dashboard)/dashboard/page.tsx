@@ -15,7 +15,6 @@ const DashboardPage = () => {
     "users",
     "/user"
   );
-  console.log("Caxhsdj: ", cachedUser);
 
   return (
     <div className="w-full space-y-5">

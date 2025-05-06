@@ -42,7 +42,7 @@ export default function Home() {
 
   const onSubmit = (values: FormSchema) => {
     mutate(values, {
-      onSuccess: ({ data }) => {
+      onSuccess: async ({ data }) => {
         const role = data.data?.role;
         const token = data.data?.token;
 
@@ -50,7 +50,8 @@ export default function Home() {
         toast.success("Success", {
           description: data.message,
         });
-        queryClient.invalidateQueries({ queryKey: ["auth-user"] });
+        await queryClient.invalidateQueries({ queryKey: ["auth-user"] });
+        await queryClient.refetchQueries({ queryKey: ["auth-user"] });
 
         const redirect = role === "admin" ? "/dashboard" : "/me";
         router.push(redirect);

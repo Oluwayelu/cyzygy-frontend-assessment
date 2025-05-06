@@ -22,10 +22,11 @@ const Navbar = ({ userData }: Props) => {
   const queryClient = useQueryClient();
 
   // Logout function to clear cookies and invalidate the auth-user query
-  const logout = () => {
+  const logout = async () => {
     deleteCookie("token");
     deleteCookie("role");
-    queryClient.invalidateQueries({ queryKey: ["auth-user"] });
+    await queryClient.invalidateQueries({ queryKey: ["auth-user"] });
+    await queryClient.refetchQueries({ queryKey: ["auth-user"] });
     router.push("/");
   };
 
